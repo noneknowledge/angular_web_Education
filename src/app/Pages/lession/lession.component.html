@@ -1,0 +1,31 @@
+
+
+<div class="container">
+    <div class="border ">
+        <div class="d-flex justify-content-around">
+            <h1 id="timeDown"></h1>
+            <h1 class="p-3" id="score">Score: {{score}}</h1>
+        </div>
+        
+        <div class="border rounded p-3  " id="gameContainer">
+            <h1 class="text-center">Nhấn vào nút để bắt đầu trả lời các câu hỏi</h1>
+            <ng-template [ngIf]="current && current.type === 'sentence' ">
+                <div *ngIf="randInt === 1">
+                    <app-scrambled (scoreEvent)="score=$event" [score]="score" [inputQuiz]="current" class="game" ></app-scrambled>
+                </div>
+                <div *ngIf="randInt === 0">
+                    <app-blankfill (scoreEvent)="score=$event" [score]="score" [inputQuiz]="current" class="game" ></app-blankfill>
+                </div>
+                
+            </ng-template>
+            <ng-template  [ngIf]="current && current.type === 'vocabulary' ">
+                <app-quiz class="game" (scoreEvent)="score=$event" [score]="score" [lessionVocabs]="vocabs" [inputQuiz]="current"></app-quiz>
+            </ng-template>
+        </div>
+        
+        <div class="text-center">
+            <button class="text btn btn-primary m-3" (click)="nextClick()">Next question</button>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,24 @@
+
+<body>
+    <div class="wrapper">
+        <form (ngSubmit) = "SubmitData()" [formGroup] = "loginForm" >
+            <h1>Login</h1>
+            <div class = "input-box">
+                <input type = "text" name ="username" formControlName= "username" placeholder="Username"  required>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" formControlName= "password"  placeholder="Password" required>
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox"> Nhớ tài khoản </label>
+                <a routerLink="/Forgot-Password" routerLinkActive="inactive">Quên mật khẩu?</a>
+            </div>
+            <button type="submit" class="btn">Đăng nhập</button>
+            <div class="register-link">
+                <p>Chưa có tài khoản? <a routerLink="/register">Đăng ký</a></p>   
+            </div>
+            
+           
+        </form>
+    </div>
+</body>

@@ -1,0 +1,20 @@
+
+<div class="container">
+  <!-- <div class="d-flex justify-content-between p-5"> -->
+    <div class="row p-4">
+    <div *ngFor="let lession of lessions" class="card col-3 m-2" style="width: 18rem;">
+      <img style="height: 200px;" src="{{lession.image}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Lession: {{lession.lessionId}} - {{lession.title}}</h5>
+        <p class="card-text">{{lession.description}}</p>
+        <div class="text-center">
+          <a routerLink="/outline/{{lession.lessionId}}" class="btn btn-primary text">Vào bài học</a>
+        </div>
+     
+      </div>
+    </div>
+   
+    
+  </div>
+    
+</div>
