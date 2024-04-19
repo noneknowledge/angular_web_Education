@@ -25,15 +25,13 @@ export class LoginComponent {
 
   public SubmitData(){
     if (this.loginForm.invalid){
+      alert("so dien thoai co 10 so, hoac co the 1 truong nao do da sai")
       console.log('sai dữ liệu: ')
-      alert("vui long nhap day du thong tin")
+      
     } 
     else
     {
       this.userLogin.login(this.loginForm.value).subscribe(data=>{
-        console.log("data")
-        console.log(data)
-        console.log("data")
         this.loginService.setUserName(this.loginForm.controls['username'].value)
         this.loginService.setToken(data)
         this.router.navigate(['home'])

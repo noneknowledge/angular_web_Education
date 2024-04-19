@@ -3,28 +3,161 @@
         <h1 class="text-center">Lession {{response.lessionId}}: {{response.title}} / {{response.vietnamese}}</h1>
         <div class="row">
             <div class="col-6 border border-info p-3">
-                <img style="max-height:100%; max-width:100%;object-fit: contain;" src="{{response.image}}" alt = "{{response.title}}">
-                <h1>
-                    Mô tả 
-                </h1>
-                <h3>{{response.description}}.</h3>
-                <h1>
-                    Comment go here
-                    <div>
-                        <h2> comment </h2>
+                <div>
+                    <h1>
+                        Top 10 highest score: 
+                    </h1>  
+                    <div class="mt-4">
+                    <main>
+                        <div id="header">
+                            <h1>Ranking</h1>
+                         
+                            <button class="share">
+                              <strong>Top 10</strong>
+                            </button>
+                          </div>
+                          <div id="leaderboard">
+                            <div class="ribbon"></div>
+                            <table>
+                              <tr>
+                                <td class="number">1</td>
+                                <td class="name">Lee Taeyong</td>
+                                <td class="points">
+                                  258.244 <img class="gold-medal" src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true" alt="gold medal"/>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="number">2</td>
+                                <td class="name">Mark Lee</td>
+                                <td class="points">258.242</td>
+                              </tr>
+                              <tr>
+                                <td class="number">3</td>
+                                <td class="name">Xiao Dejun</td>
+                                <td class="points">258.223</td>
+                              </tr>
+                              <tr>
+                                <td class="number">4</td>
+                                <td class="name">Qian Kun</td>
+                                <td class="points">258.212</td>
+                              </tr>
+                              <tr>
+                                <td class="number">5</td>
+                                <td class="name">Johnny Suh</td>
+                                <td class="points">258.208</td>
+                              </tr>
+                            </table>
+                            
+                          </div>
+                    </main>
                     </div>
-                </h1>
+                </div>
+                <div class="mt-5">
+                    <h1>Comment Section: </h1>
+                        <div class="p-4">
+                            <div class="card bg-light">
+                                <header class="card-header border-0 bg-transparent">
+                                  <img
+                                    src="https://via.placeholder.com/40x40"
+                                    class="rounded-circle me-2"
+                                  /><a class="fw-semibold text-decoration-none">JohnDoe</a>
+                                  <!-- <span class="ms-3 small text-muted">2 months ago</span> -->
+                                </header>
+                                <div class="card-body py-1">
+                                  <form>
+                                    <div>
+                                      <label for="exampleFormControlTextarea1" class="visually-hidden">
+                                        Comment</label
+                                      >
+                                      <textarea
+                                        class="form-control form-control-sm border border-2 rounded-1"
+                                        id="exampleFormControlTextarea1"
+                                        style="height: 50px"
+                                        placeholder="Add a comment..."
+                                        minlength="3"
+                                        maxlength="255"
+                                        required
+                                      ></textarea>
+                                    </div>
+                                  </form>
+                                </div>
+                                <footer class="card-footer bg-transparent border-0 text-end">
+                                  <button class="btn btn-link btn-sm me-2 text-decoration-none">
+                                    Cancel
+                                  </button>
+                                  <button
+                                    type="submit"
+                                    class="btn btn-primary btn-sm"
+                                  >
+                                    Submit
+                                  </button>
+                                </footer>
+                              </div>
+                              <aside class="d-flex justify-content-between align-items-center my-4">
+                                <h4 class="h6">3 Comments</h4>
+                                </aside>
+                                <article class="card bg-light">
+                                    <header class="card-header border-0 bg-transparent d-flex align-items-center">
+                                      <div>
+                                      <img
+                                        src="https://via.placeholder.com/40x40"
+                                        class="rounded-circle me-2"
+                                      /><a class="fw-semibold text-decoration-none">JohnDoe</a>
+                                      <span class="ms-3 small text-muted">2 months ago</span>
+                                      </div>
+                                      <div class="dropdown ms-auto">
+                                      <button class="btn btn-link text-decoration-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <i class="bi bi-three-dots-vertical"></i>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Report</a></li>
+                                      </ul>
+                                    </div>
+                                    </header>
+                                    <div class="card-body py-2 px-3">
+                                      some text asdlaksd asndasd allal ? asdfasd lkakdaa akla akdn adnot!
+                                    </div>
+                                    <footer class="card-footer bg-white border-0 py-1 px-3">
+                                      <button
+                                        type="button"
+                                        class="btn btn-link btn-sm text-decoration-none ps-0"
+                                      >
+                                        <i class="bi bi-hand-thumbs-up me-1"></i>(3)
+                                      </button>
+                                      <button type="button" class="btn btn-link btn-sm text-decoration-none">
+                                        Reply
+                                      </button>
+                                      <button
+                                        type="button"
+                                        class="btn btn-light btn-sm border rounded-4 ms-2"
+                                      >
+                                        <i class="bi bi-check-circle-fill text-secondary"></i> Mark as answer
+                                      </button>
+                                    </footer>
+                                  </article>
+                        </div>
+                  
+                </div>
+               
             </div>
             <div class="col-6 border border-danger">
-                <h1>
-                    Intructions
-                </h1>
-                <h1>
-                   <button (click)="startTest()">Start your test</button>
-                </h1>
-                <h1>
-                    Top 10 highest score: 
-                </h1>
+                <div>
+                    <img style="max-height:100%; max-width:100%;object-fit: contain;" src="{{response.image}}" alt = "{{response.title}}">
+                    <h1>
+                        Mô tả 
+                    </h1>
+                    <h3>{{response.description}}.</h3>
+                </div>
+                <div class="border p-5 m-3">
+                    <h1>
+                        Intructions
+                    </h1>
+                    <h1>
+                       <button (click)="startTest()">Start your test</button>
+                    </h1>
+                </div>
+                <hr>
+                
             </div>
         </div>
     </div>

@@ -22,6 +22,7 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { BlankfillComponent } from './Components/blankfill/blankfill.component';
 import { LessionOutlineComponent } from './Pages/lession-outline/lession-outline.component';
 import { LessionInstructionsComponent } from './Pages/lession-instructions/lession-instructions.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LessionInstructionsComponent } from './Pages/lession-instructions/lessi
     RegisterComponent,
     BlankfillComponent,
     LessionOutlineComponent,
-    LessionInstructionsComponent
+    LessionInstructionsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

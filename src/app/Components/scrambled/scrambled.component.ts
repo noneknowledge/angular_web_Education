@@ -22,6 +22,7 @@ export class ScrambledComponent implements AfterViewInit, OnChanges, OnInit {
   eContainer:any
   trueAn:any
   answer:AnswerValue[] = []
+  click =0
 
   ngOnInit(): void {
     this.bindingValue(this.inputQuiz)
@@ -48,25 +49,31 @@ export class ScrambledComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   checkAnswer(){
-    this.clearListener()
-    var finalAnswer = this.answer.map(a=>a.value).join(" ").trim()
    
+    if (this.click===0)
+      {
+        this.click+=1
+        this.clearListener()
+        var finalAnswer = this.answer.map(a=>a.value).join(" ").trim()
+        if(this.trueAn === finalAnswer)
+        {
+         
+          for (let i = 0 ; i < this.answer.length;i++){
+            this.answer[i].el.classList.add("bg-success")
+          }
     
-    if(this.trueAn === finalAnswer)
-    {
-     
-      for (let i = 0 ; i < this.answer.length;i++){
-        this.answer[i].el.classList.add("bg-success")
+          this.score +=100
+          this.scoreEvent.emit(this.score)
+          return
+        }
+        else{
+          for (let i = 0 ; i < this.answer.length;i++){
+            this.answer[i].el.classList.add("bg-danger")
+          }
+        }
       }
-
-      this.score +=100
-      this.scoreEvent.emit(this.score)
-      return
-    }
     else{
-      for (let i = 0 ; i < this.answer.length;i++){
-        this.answer[i].el.classList.add("bg-danger")
-      }
+      alert("Vui long chuyen cau khac ")
     }
   }
 

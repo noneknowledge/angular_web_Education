@@ -27,4 +27,13 @@ export class UserService {
     var body = payload
     return this.httpClient.post(url,body,{headers:header})
   }
+
+  getProfile(token:any){
+    var header= new HttpHeaders({
+      'Content-Type':'application/json',
+      'Authorization' : `Bearer ${token}`
+    })
+    var url = `${this.restfulAPI}/profile`
+    return this.httpClient.get(url,{headers:header})
+  }
 }

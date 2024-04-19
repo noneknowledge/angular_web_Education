@@ -31,13 +31,15 @@ export class LessionOutlineComponent implements OnInit {
 
   startTest(){
     var token = this.loginService.getToken()
-    if (token === null){
-      this.route.navigate(['login'])
-    }
-
     console.log("token")
     console.log(token)
     console.log("token")
+    if (token === null){
+      this.route.navigate(['login'])
+      return
+    }
+
+
     console.log("id: " + this.lessionId)
     this.route.navigate([`lession/${this.lessionId}`])
   }

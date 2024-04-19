@@ -9,7 +9,7 @@ export class BlankfillComponent implements OnInit,OnChanges{
   @Input() inputQuiz:any;
   @Input() score:any;
   @Output() scoreEvent = new EventEmitter()
-
+  
   click=0
   fillWord:any
   question:any
@@ -34,6 +34,7 @@ export class BlankfillComponent implements OnInit,OnChanges{
 
   checkAnswer(){
     console.log("click")
+    if (this.click > 0) alert("vui long chuyen cau hoi")
     if(this.click===0)
     {
       this.click +=1

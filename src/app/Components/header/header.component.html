@@ -44,7 +44,7 @@
       <!-- Left links -->
 
       <div *ngIf="isLoggedIn" class="d-flex align-items-center">
-        <button  data-mdb-ripple-init type="button" class="btn btn-link px-3 me-2">
+        <button  data-mdb-ripple-init routerLink="/profile" type="button" class="btn btn-link px-3 me-2">
           {{userName}}
         </button>
         <button (click)="logOut()" data-mdb-ripple-init type="button" class="btn btn-primary me-3">
