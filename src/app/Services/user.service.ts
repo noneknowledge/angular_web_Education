@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { tokenResponse } from '../Models/tokenResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 export class UserService {
   private restfulAPI = "http://localhost:5051/api/User"
   
+
 
   constructor(private httpClient : HttpClient) { }
   login(payload:any){
@@ -16,7 +18,7 @@ export class UserService {
     })
     var url = `${this.restfulAPI}/login`
     var body = payload
-    return this.httpClient.post(url,body,{headers:header,responseType:'text'})
+    return this.httpClient.post<tokenResponse>(url,body,{headers:header})
   }
   register(payload:any){
     var header= new HttpHeaders({

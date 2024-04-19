@@ -10,27 +10,32 @@ import { LoginService } from 'src/app/Services/login.service';
 export class HeaderComponent implements OnInit {
   isLoggedIn:boolean | undefined
   userName:string |undefined
+  avatar:string | undefined
+
   constructor(private loginState:LoginService, private router:Router){}
   
   ngOnInit(): void {
+    
     console.log("init")
-    var token= this.loginState.getToken()
-    console.log(token)
-    if(token !== null)
+    var tokenResponse= this.loginState.getLocalStorageToken()
+ 
+    if(tokenResponse !== null)
       {
         this.isLoggedIn = true
+        this.loginState.setData(tokenResponse);
         this.userName = this.loginState.getUserName();
+        this.avatar = this.loginState.getAvatar();
+        console.log(this.avatar)
+        console.log(this.userName)
+        console.log(this.loginState.getToken())
       }
 
 
-    this.loginState.getLoginState().subscribe(data=>{
-      console.log('is logged ? ' + data)
-      console.log(this.isLoggedIn)
-      this.isLoggedIn = data
-      if(data===true){
-        console.log("header")
-        console.log(this.loginState.getUserName())
-        console.log("header")
+    this.loginState.getLoginState().subscribe(boolean=>{
+      this.isLoggedIn = boolean
+      if(boolean===true){
+        this.loginState.setData(this.loginState.getLocalStorageToken())
+        this.avatar = this.loginState.getAvatar();
         this.userName = this.loginState.getUserName();
       }
     })

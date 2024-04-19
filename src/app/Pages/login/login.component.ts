@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/Services/login.service';
 import { UserService } from 'src/app/Services/user.service';
 import { Router } from '@angular/router';
+import { tokenResponse } from 'src/app/Models/tokenResponse';
+
 
 
 @Component({
@@ -31,9 +33,14 @@ export class LoginComponent {
     } 
     else
     {
-      this.userLogin.login(this.loginForm.value).subscribe(data=>{
-        this.loginService.setUserName(this.loginForm.controls['username'].value)
+      this.userLogin.login(this.loginForm.value).subscribe((data:tokenResponse)=>{
+    
         this.loginService.setToken(data)
+        console.log("tokenResponse")
+        
+        console.log(data)
+        console.log(data.userName)
+        console.log("tokenResponse")
         this.router.navigate(['home'])
         
       },

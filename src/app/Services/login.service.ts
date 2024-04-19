@@ -9,38 +9,45 @@ import { Subject } from 'rxjs';
 export class LoginService {
   private login = new Subject<boolean>()
   private userName = ""
+  private avatar = ""
+  private token = ""
   constructor() { }
   
-  setToken(token:any){
-    var userInfo = {token: token, username: this.userName}
-    localStorage.setItem("token",JSON.stringify(userInfo))
+  setToken(tokenResponse:any){
+   
+    console.log(tokenResponse.avatarImage)
+    localStorage.setItem("token",JSON.stringify(tokenResponse))
     this.login.next(true)
   }
-  setUserName(data:any){
-    this.userName = data
+  setData(tokenResponse:any){
+   
+    if (tokenResponse !== null)
+      {
+        tokenResponse = JSON.parse(tokenResponse)
+        console.log(tokenResponse)
+        this.userName = tokenResponse.userName
+        this.avatar = tokenResponse.avatarImage
+        this.token = tokenResponse.token
+      }
+  }
+
+  getAvatar(){
+    return this.avatar
   }
   getUserName(){
-    var user:any = localStorage.getItem("token")
-    if (user !== null)
-      {
-        user = JSON.parse(user)
-        return user.username
-      }
-    return ""
+    return this.userName
   }
   removeToken(){
     localStorage.removeItem("token")
-    
     this.login.next(false)
   }
+
+  getLocalStorageToken(){
+    return localStorage.getItem("token")
+  }
+
   getToken(){
-    var token:any = localStorage.getItem("token")
-    if (token !== null)
-      {
-        token = JSON.parse(token)
-        return token.token
-      }
-    return null 
+    return this.token
   }
   getLoginState(){
     return this.login
