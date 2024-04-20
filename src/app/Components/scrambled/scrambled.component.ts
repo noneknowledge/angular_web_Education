@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { AnswerValue } from 'src/app/AnswerValue';
+import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AnswerValue } from 'src/app/Models/AnswerValue';
 
 @Component({
   selector: 'app-scrambled',
@@ -22,7 +22,10 @@ export class ScrambledComponent implements AfterViewInit, OnChanges, OnInit {
   eContainer:any
   trueAn:any
   answer:AnswerValue[] = []
-  click =0
+  click = 0
+
+  hiddenText = ""
+
 
   ngOnInit(): void {
     this.bindingValue(this.inputQuiz)
@@ -31,21 +34,26 @@ export class ScrambledComponent implements AfterViewInit, OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if(changes["inputQuiz"] && changes["inputQuiz"].previousValue)
       {
-        
-        this.bindingValue(changes['inputQuiz'].currentValue);
         this.reset();
-        this.createText();
+        this.bindingValue(changes['inputQuiz'].currentValue);
+ 
+        this.createText()
       }
   }
 
   
 
-  ngAfterViewInit(): void {
+  updateRect(){
     this.toRect = document.getElementById("toBar")?.getBoundingClientRect()
     this.fromRect = document.getElementById("fromBar")?.getBoundingClientRect()
+    
+  }
+  ngAfterViewInit(): void {
     this.eContainer = document.getElementById("text-container")
 
+    this.updateRect();
     this.createText()
+    
   }
 
   checkAnswer(){
@@ -81,38 +89,47 @@ export class ScrambledComponent implements AfterViewInit, OnChanges, OnInit {
     this.destroyText();
     this.answer = [];
   }
+
   destroyText(){
     this.eContainer.innerHTML = ""
     // var textEl = document.querySelectorAll(".h1-clickable")
     // textEl.forEach(a=>{
     //   a.remove(); console.log(a.innerHTML)})
-    
   }
+
+
   createText(){
+    
     var previousElement:HTMLHeadingElement | undefined
     
-    // var index = -1
+
     if(this.sentenceArr){
       this.sentenceArr.forEach( (text:string) => {
-        // index++
+
         var quiz = document.createElement("h1");
         this.textClass.forEach( a=>{
             quiz.classList.add(a)
         })
         if(!previousElement){
+          console.log("x: " + this.fromRect.left + "y: " + this.fromRect.top)
+     
             quiz.style.left = `${this.fromRect.left + 2}px`;
             quiz.style.top = `${this.fromRect.top+ 2}px`;      
         }
         else{
+
           var elBefore = previousElement!.getBoundingClientRect();
           var predictRight = 100 + elBefore.right
-         
+          console.log("pre x: "+ elBefore.left )
+          console.log( "pre Y: " + elBefore.top)
           if(predictRight > this.fromRect.right)
           { 
+              console.log("chua dai qua")
               quiz.style.left = `${this.fromRect.left + 2}px`;
-              quiz.style.top = `${elBefore.bottom + 2 }px`;
+              quiz.style.top = `${elBefore.bottom + 2}px`;
           }
           else{
+       
               quiz.style.left = `${elBefore.right+2}px`;
               quiz.style.top = `${elBefore.top}px`;
           }         
@@ -233,6 +250,7 @@ export class ScrambledComponent implements AfterViewInit, OnChanges, OnInit {
     this.trueAn = inputValue.blankSentence.replace("_",inputValue.fillWord)
     this.sentenceArr = this.shuffleArray(this.trueAn.split(" "))  
     this.scrambledSen = this.sentenceArr.join(" ")
+    
 
   }
 

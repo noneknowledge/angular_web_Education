@@ -23,6 +23,7 @@ import { BlankfillComponent } from './Components/blankfill/blankfill.component';
 import { LessionOutlineComponent } from './Pages/lession-outline/lession-outline.component';
 import { LessionInstructionsComponent } from './Pages/lession-instructions/lession-instructions.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
+import { ReadingComponent } from './Components/reading/reading.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ProfileComponent } from './Pages/profile/profile.component';
     BlankfillComponent,
     LessionOutlineComponent,
     LessionInstructionsComponent,
-    ProfileComponent
+    ProfileComponent,
+    ReadingComponent
   ],
   imports: [
     BrowserModule,

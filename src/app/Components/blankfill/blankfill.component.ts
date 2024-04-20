@@ -1,4 +1,5 @@
 import { Component, OnInit,Input,Output,EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { SpeakService } from 'src/app/Services/speak.service';
 
 @Component({
   selector: 'app-blankfill',
@@ -10,16 +11,30 @@ export class BlankfillComponent implements OnInit,OnChanges{
   @Input() score:any;
   @Output() scoreEvent = new EventEmitter()
   
+  selectedVoice:number = 0
   click=0
   fillWord:any
   question:any
   inputAnswer = ""
+  hintImage = ""
+  hintVoice = ""
+  voices: SpeechSynthesisVoice[] = [];
+
+  constructor(private speakService:SpeakService){}
 
   ngOnInit(): void {
+    console.log(this.inputQuiz)
+    setTimeout(()=>{this.voices = this.speakService.getVoices()},100)
     this.bindingValue(this.inputQuiz);
 
   }
+  speak(){
+    this.speakService.speak(this.hintVoice,this.selectedVoice)
+  }
   bindingValue(inputData:any){
+    this.hintImage = inputData.hint
+    var text = inputData.blankSentence.replace("_",inputData.fillWord)
+    this.hintVoice = text
     this.question = inputData.blankSentence.split(" ")
     this.fillWord = inputData.fillWord
   }

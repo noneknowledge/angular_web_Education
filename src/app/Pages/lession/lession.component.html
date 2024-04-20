@@ -1,14 +1,17 @@
 
 
 <div class="container">
-    <div class="border ">
+    <div *ngIf="apiData === undefined" >
+        Loading... 
+    </div>
+    <div class="border " *ngIf="apiData !== undefined" >
         <div class="d-flex justify-content-around">
             <h1 id="timeDown"></h1>
             <h1 class="p-3" id="score">Score: {{score}}</h1>
         </div>
         
         <div class="border rounded p-3  " id="gameContainer">
-            <h1 class="text-center">Nhấn vào nút để bắt đầu trả lời các câu hỏi</h1>
+            <h1 *ngIf="index===-1" class="text-center">Nhấn vào nút để bắt đầu trả lời các câu hỏi</h1>
             <ng-template [ngIf]="current && current.type === 'sentence' ">
                 <div *ngIf="randInt === 1">
                     <app-scrambled (scoreEvent)="score=$event" [score]="score" [inputQuiz]="current" class="game" ></app-scrambled>
@@ -20,6 +23,9 @@
             </ng-template>
             <ng-template  [ngIf]="current && current.type === 'vocabulary' ">
                 <app-quiz class="game" (scoreEvent)="score=$event" [score]="score" [lessionVocabs]="vocabs" [inputQuiz]="current"></app-quiz>
+            </ng-template>
+            <ng-template  [ngIf]="current && current.type === 'reading' ">
+                <app-reading class="game" (scoreEvent)="score=$event" [score]="score" [inputQuiz]="current"></app-reading>
             </ng-template>
         </div>
         

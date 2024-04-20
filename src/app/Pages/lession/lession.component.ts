@@ -31,7 +31,7 @@ export class LessionComponent implements OnInit, AfterViewInit{
   
   refreshInterval:any
   current:any
-  randInt:number = 0
+  randInt:number = 1
   
   constructor(private service:LessionService, private mytool :MytoolService){}
   
@@ -44,8 +44,7 @@ export class LessionComponent implements OnInit, AfterViewInit{
       this.vocabs = vocabularies
       this.lessionContent = sentences.concat(readings).concat(vocabularies)
     
-      console.log(this.lessionContent)
-      console.log( this.apiData)
+     
     });
   }
 
@@ -82,7 +81,7 @@ export class LessionComponent implements OnInit, AfterViewInit{
   }
   nextClick(){
     // this.stopInterval() 
-    this.randInt = this.mytool.getRandomInt(2)
+    // this.randInt = this.mytool.getRandomInt(2)
     this.index ++;
     console.log(this.lessionContent[this.index])
 

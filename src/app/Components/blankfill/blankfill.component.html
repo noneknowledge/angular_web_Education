@@ -1,4 +1,11 @@
 <div class="border rounded p-5">
+    <div class="d-fex justify-content-center">
+        <img src="{{hintImage}}" alt="" style="width: 150px;height: 150px;" class="img-thumbnail">
+        <select [(ngModel)]="selectedVoice" >
+            <option *ngFor="let voice of voices; index as i" [value]="i">{{voice.name}}</option>
+          </select>
+        <button (click)="speak()">Speak</button>
+    </div>
     <h1 class="d-inline" *ngFor="let text of question">
         <span class="m-3"  *ngIf="text !== '_' && text !== '_.'">{{text}}</span>
         <span class="m-3"  *ngIf="text === '_'"><input [(ngModel)]="inputAnswer" style="max-width: 100px;" type="text"></span>
