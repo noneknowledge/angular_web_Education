@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   
   ngOnInit(): void {
     
-    console.log("init")
+
     var tokenResponse= this.loginState.getLocalStorageToken()
  
     if(tokenResponse !== null)
@@ -25,9 +25,7 @@ export class HeaderComponent implements OnInit {
         this.loginState.setData(tokenResponse);
         this.userName = this.loginState.getUserName();
         this.avatar = this.loginState.getAvatar();
-        console.log(this.avatar)
-        console.log(this.userName)
-        console.log(this.loginState.getToken())
+
       }
 
 

@@ -86,6 +86,7 @@ export class ScrambledComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   reset(){
+    this.click = 0
     this.destroyText();
     this.answer = [];
   }

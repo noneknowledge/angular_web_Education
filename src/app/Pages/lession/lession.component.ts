@@ -1,6 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs';
 import { LessionService } from 'src/app/Services/lession.service';
+import { LoginService } from 'src/app/Services/login.service';
 import { MytoolService } from 'src/app/Services/mytool.service';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-lession',
@@ -17,35 +21,33 @@ export class LessionComponent implements OnInit, AfterViewInit{
   scorePlace:HTMLElement | undefined | null
   index:number = -1
   vocabs:any
-  
-  // questions = [
-  //   {blankSentence:"I can _ feel you rolling",fillWord:"normal", bait:"out whe are when",type:"scrambled"},
-  //   {blankSentence:"i _ fine thank you",fillWord:"am", bait:"out whe are when",type:"scrambled"},
-  //   {question:"Word spills out __ your mouth.",bingo:"of", bait:"out of here when",type:"quiz"},
-  //   {question:"Cau so 2",bingo:"of", bait:"out of here when",type:"quiz"},
-  //   {question:"Hello nigga",type:"speak"},
-  //   {question:"Somebody that i used __ know. Somebody that i used __ know.",bingo:"to", bait:"to be here when",type:"fill"},
-  //   {question:"Word spills out __ your mouth.",bingo:"of", bait:"out of here when",type:"quiz"},
-  //   {question:"I can normal feel you rolling",bingo:"I can normal feel you rolling", bait:"out whe are when",type:"scrambled"},
-  //   {question:"Feel like i love somebody that i did not __.",bingo:"have", bait:"to have here when",type:"quiz"},]
-  
+  lessionId:number | undefined
   refreshInterval:any
   current:any
   randInt:number = 1
   
-  constructor(private service:LessionService, private mytool :MytoolService){}
+  constructor( private userService:UserService,private loginService:LoginService ,private service:LessionService, private mytool :MytoolService, private activatedRoute:ActivatedRoute){}
   
   ngOnInit(): void {
-    this.service.getLession(1).subscribe(data=>{
-      this.apiData = data
-      var readings = this.apiData["readings"].map((a:any)=>({...a,type:"reading"}))
-      var sentences = this.apiData["sentences"].map((a:any)=>({...a,type:"sentence"}))
-      var vocabularies = this.apiData["vocabularies"].map((a:any)=>({...a,type:"vocabulary"}))
-      this.vocabs = vocabularies
-      this.lessionContent = sentences.concat(readings).concat(vocabularies)
-    
-     
-    });
+    this.activatedRoute.paramMap.subscribe(params =>{
+      this.lessionId = Number(params.get("id"))
+      this.service.getLession(this.lessionId).subscribe(data=>{
+        
+        this.apiData = data
+        var readings = this.apiData["readings"].map((a:any)=>({...a,type:"reading"}))
+        var sentences = this.apiData["sentences"].map((a:any)=>({...a,type:"sentence"}))
+        var vocabularies = this.apiData["vocabularies"].map((a:any)=>({...a,type:"vocabulary"}))
+        vocabularies = this.mytool.shuffleArray(vocabularies)
+        this.vocabs = vocabularies
+        var firstTenVocab = vocabularies.splice(0,10);
+        this.lessionContent = sentences.concat(readings).concat(firstTenVocab)
+        console.log(this.lessionContent)
+        if(this.lessionContent.length === 0){
+          alert("bai hoc nay chua co content nao ca")
+        }
+      });
+    })
+   
   }
 
   randomIntFromInterval(min:number, max:number) { // min and max included 
@@ -83,14 +85,17 @@ export class LessionComponent implements OnInit, AfterViewInit{
     // this.stopInterval() 
     // this.randInt = this.mytool.getRandomInt(2)
     this.index ++;
-    console.log(this.lessionContent[this.index])
 
     // this.startInterval();
-    // this.current = this.questions[this.index]
-
-
+    if (this.index === this.lessionContent.length){
+      var token = this.loginService.getToken()
+      var body = {Score: this.score, LessionID:this.lessionId, Comment:""}
+      this.userService.updateLessionScore(body,token).subscribe(response=>{
+        console.log(response)
+      })
+    }
     this.current = this.lessionContent[this.index]
-    console.log(this.current.type)
+
   }
   
 

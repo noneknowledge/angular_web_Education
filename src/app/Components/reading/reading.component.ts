@@ -17,19 +17,33 @@ export class ReadingComponent implements OnChanges, OnInit{
   an2 = ""
   click1 = 0
   click2 = 0
+  mystring = 'Dòng 1\nDòng 2';
+  chosenEl:any[] = []
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes["inputQuiz"] && changes["inputQuiz"].previousValue)
       {
-        this.resetPrevius();
-
+        this.resetPrevious();
+        this.bindingValue(this.inputQuiz)
       }
   }
 
   ngOnInit(): void {
     console.log(this.inputQuiz)
+    this.bindingValue(this.inputQuiz)
   }
 
+  outHover(event:any){
+    event.target.classList.remove("bg-info")
+    event.target.classList.remove("text-white")
+    event.target.style.transform = "scale(1)"
+  }
+  hoverHandle(event:any){
+
+    event.target.classList.add("bg-info")
+    event.target.classList.add("text-white")
+    event.target.style.transform = "scale(1.1)"
+  }
 
   bindingValue(inputData:any){
     this.paragraph = inputData.paragraph
@@ -39,21 +53,62 @@ export class ReadingComponent implements OnChanges, OnInit{
     this.question2 = inputData.question2
   }
 
-  resetPrevius(){
+  resetPrevious(){
     this.click1 = 0
     this.click2 = 0
+    var removeClass = ['bg-success','bg-danger']
+    this.chosenEl.forEach(el=>{
+      for (let i = 0; i<removeClass.length;i++){
+        if(el.classList.contains(removeClass[i]))
+          {
+            el.classList.remove(removeClass[i])
+          }
+      }
+    })
   }
-  check1(){
+  check1(event:any){
     console.log("click _1")
     if(this.click1 > 0)
       {
         alert("da chon cau tra loi")
         return
       }
+
+    var el = event.target
+    this.chosenEl.push(el)
     this.click1 +=1
+    var choseVal = el.innerHTML.toLowerCase();
+    if (this.an1.toLocaleLowerCase() === choseVal){
+      el.classList.add("bg-success")
+      this.score +=100
+      this.scoreEvent.emit(this.score)
+    }
+    else{
+      el.classList.add("bg-danger")
+    }
   }
-  check2(){
+
+  
+  check2(event:any){
+    if(this.click2 > 0)
+      {
+        alert("da chon cau tra loi")
+        return
+      }
     console.log("click _1")
+    this.click2 += 1
+    var el = event.target
+    this.chosenEl.push(el)
+    var choseVal = el.innerHTML.toLowerCase();
+    if (this.an2.toLocaleLowerCase() === choseVal){
+      el.classList.add("bg-success")
+      this.score +=100
+      this.scoreEvent.emit(this.score)
+    }
+    else{
+      el.classList.add("bg-danger")
+    }
+    this.scoreEvent.emit(this.score)
   }
 
 }

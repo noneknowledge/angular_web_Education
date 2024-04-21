@@ -38,4 +38,13 @@ export class UserService {
     var url = `${this.restfulAPI}/profile`
     return this.httpClient.get(url,{headers:header})
   }
+
+  updateLessionScore(body:any,token:any){
+    var header= new HttpHeaders({
+      'Content-Type':'application/json',
+      'Authorization' : `Bearer ${token}`
+    })
+    var url = `http://localhost:5051/api/userlession`
+    return this.httpClient.put(url,body,{headers:header})
+  }
 }

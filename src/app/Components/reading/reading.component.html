@@ -1,1 +1,23 @@
-<p>reading works!</p>
+<div>
+    <div class="p-4 border border-info">
+        <h1>Reading</h1>
+        <p style="white-space: pre-wrap">{{mystring}}</p>
+        <h3 style="white-space: pre-wrap">{{paragraph}}</h3>
+    </div>
+    <hr>
+    <div class="row p-4">
+    <h1>{{question1}}</h1>
+        <h2 (click)="check1($event)" (mouseover)="hoverHandle($event)" (mouseout)="outHover($event)" class="border text-center col-5 text-secondary">True</h2>
+        <h2 class="col"></h2>
+        <h2 (click)="check1($event)" (mouseover)="hoverHandle($event)" (mouseout)="outHover($event)" class="border text-center col-5 text-secondary">False</h2>
+    </div>
+    <hr>
+        <div class="row p-4">
+        <h1>{{question2}}</h1>
+            <h2 (click)="check2($event)" (mouseover)="hoverHandle($event)" (mouseout)="outHover($event)" class="border text-center col-5 text-secondary">True</h2>
+            <h2 class="col"></h2>
+            <h2 (click)="check2($event)" (mouseover)="hoverHandle($event)" (mouseout)="outHover($event)" class="border text-center col-5 text-secondary">False</h2>      
+    </div>
+
+
+</div>
