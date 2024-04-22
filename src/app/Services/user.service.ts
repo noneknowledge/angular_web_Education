@@ -39,6 +39,15 @@ export class UserService {
     return this.httpClient.get(url,{headers:header})
   }
 
+  updateComment(body:any,token:any){
+    var header= new HttpHeaders({
+      'Content-Type':'application/json',
+      'Authorization' : `Bearer ${token}`
+    })
+    var url = `http://localhost:5051/api/userlession/comment`
+    return this.httpClient.put(url,body,{headers:header})
+  }
+
   updateLessionScore(body:any,token:any){
     var header= new HttpHeaders({
       'Content-Type':'application/json',

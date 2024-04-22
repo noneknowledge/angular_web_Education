@@ -4,6 +4,7 @@ import { LessionService } from 'src/app/Services/lession.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/Services/login.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-lession-outline',
@@ -16,12 +17,18 @@ export class LessionOutlineComponent implements OnInit {
   token:any
   canComment:boolean = false
   canTest:boolean = false
+  userName:string | undefined
+  avatarImage:string | undefined
+  
 
-  constructor(private service:LessionService, private ActiveRoute:ActivatedRoute, private router:Router, private loginService:LoginService){}
+  constructor(private service:LessionService,private userLessionService: UserService, private ActiveRoute:ActivatedRoute, private router:Router, private loginService:LoginService){}
   ngOnInit(): void {
     this.token = this.loginService.getToken()
+    this.userName = this.loginService.getUserName();
+    console.log("Username: " + this.userName)
+    this.avatarImage = this.loginService.getAvatar();
     this.ActiveRoute.paramMap.subscribe(params=>{
-      this.lessionId = params.get('id')
+      this.lessionId = Number(params.get('id'))
       console.log(this.lessionId)
       console.log("id")
       this.service.getLessionOutLine(this.lessionId,this.token).subscribe(data=>{
@@ -47,11 +54,19 @@ export class LessionOutlineComponent implements OnInit {
     })
   }
 
+  sendComment(textAreaValue:any){
+    console.log(textAreaValue)
+    if (textAreaValue.length===0) return;
+    var body= {
+      LessionId : this.lessionId,
+      Comment : textAreaValue
+    }
+    this.userLessionService.updateComment(body,this.token).subscribe(response =>{
+      console.log(response)
+    })
+  }
   startTest(){
     
-    console.log("token")
-    console.log(this.token)
-    console.log("token")
     if (this.token === null){
       this.router.navigate(['login'])
       return
