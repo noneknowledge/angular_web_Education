@@ -20,10 +20,24 @@ export class LessionService {
     return this.httpClient.get(url,this.httpOptions);
   }
 
-  getLessionOutLine(id:number){
+  getLessionOutLine(id:number,token = null)
+  { 
+   
     const url = `${this.restfulAPI}/outline/${id}`
-    return this.httpClient.get(url,this.httpOptions);
+    if (token===null){
+      
+      return this.httpClient.get(url,this.httpOptions);
+    }
+    else{
+      var header= new HttpHeaders({
+        'Content-Type':'application/json',
+        'Authorization' : `Bearer ${token}`
+      })
+      return this.httpClient.get(url,{headers:header});
+    }
+    
   }
+
   getLessionInstruction(id:number){
     const url = `${this.restfulAPI}/instruction/${id}`
     return this.httpClient.get(url,this.httpOptions);

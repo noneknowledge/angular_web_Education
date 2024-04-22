@@ -15,7 +15,7 @@ export class LoginService {
   
   setToken(tokenResponse:any){
    
-    console.log(tokenResponse.avatarImage)
+    
     localStorage.setItem("token",JSON.stringify(tokenResponse))
     this.login.next(true)
   }
@@ -24,7 +24,7 @@ export class LoginService {
     if (tokenResponse !== null)
       {
         tokenResponse = JSON.parse(tokenResponse)
-        console.log(tokenResponse)
+
         this.userName = tokenResponse.userName
         this.avatar = tokenResponse.avatarImage
         this.token = tokenResponse.token

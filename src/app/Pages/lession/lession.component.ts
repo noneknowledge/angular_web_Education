@@ -32,7 +32,6 @@ export class LessionComponent implements OnInit, AfterViewInit{
     this.activatedRoute.paramMap.subscribe(params =>{
       this.lessionId = Number(params.get("id"))
       this.service.getLession(this.lessionId).subscribe(data=>{
-        
         this.apiData = data
         var readings = this.apiData["readings"].map((a:any)=>({...a,type:"reading"}))
         var sentences = this.apiData["sentences"].map((a:any)=>({...a,type:"sentence"}))
@@ -87,12 +86,13 @@ export class LessionComponent implements OnInit, AfterViewInit{
     this.index ++;
 
     // this.startInterval();
-    if (this.index === this.lessionContent.length){
+    if (this.index >= this.lessionContent.length){
       var token = this.loginService.getToken()
       var body = {Score: this.score, LessionID:this.lessionId, Comment:""}
       this.userService.updateLessionScore(body,token).subscribe(response=>{
         console.log(response)
       })
+      return ;
     }
     this.current = this.lessionContent[this.index]
 

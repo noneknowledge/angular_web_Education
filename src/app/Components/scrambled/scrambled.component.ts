@@ -112,7 +112,7 @@ export class ScrambledComponent implements AfterViewInit, OnChanges, OnInit {
             quiz.classList.add(a)
         })
         if(!previousElement){
-          console.log("x: " + this.fromRect.left + "y: " + this.fromRect.top)
+          // console.log("x: " + this.fromRect.left + "y: " + this.fromRect.top)
      
             quiz.style.left = `${this.fromRect.left + 2}px`;
             quiz.style.top = `${this.fromRect.top+ 2}px`;      
@@ -121,11 +121,11 @@ export class ScrambledComponent implements AfterViewInit, OnChanges, OnInit {
 
           var elBefore = previousElement!.getBoundingClientRect();
           var predictRight = 100 + elBefore.right
-          console.log("pre x: "+ elBefore.left )
-          console.log( "pre Y: " + elBefore.top)
+          // console.log("pre x: "+ elBefore.left )
+          // console.log( "pre Y: " + elBefore.top)
           if(predictRight > this.fromRect.right)
           { 
-              console.log("chua dai qua")
+              // console.log("chua dai qua")
               quiz.style.left = `${this.fromRect.left + 2}px`;
               quiz.style.top = `${elBefore.bottom + 2}px`;
           }

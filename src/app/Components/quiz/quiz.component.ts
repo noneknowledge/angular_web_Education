@@ -77,7 +77,6 @@ export class QuizComponent implements OnInit,OnChanges,AfterViewInit {
     }
     this.bait.push(vocab)
     this.bait = this.mytool.shuffleArray(this.bait)
-    console.log(this.bait)
     this.quiz = this.bait
     this.question = vocab
     this.bingo = vocab.vietnamese
@@ -97,7 +96,7 @@ export class QuizComponent implements OnInit,OnChanges,AfterViewInit {
     event.target.style.transform = "scale(1.1)"
   }
   addEvent(){
-    console.log("add hover")
+    console.log("add event")
     this.allQuiz = document.getElementsByClassName("quiz")
     for (let i = 0; i < this.allQuiz.length;i++){
       console.log(this.allQuiz[i].textContent)
@@ -113,27 +112,30 @@ export class QuizComponent implements OnInit,OnChanges,AfterViewInit {
     }
   }
   checkAnswer(data:any){
-    console.log(data)
+    console.log("click data vocab: " +data.vocab)
+    for (let i = 0; i< this.allQuiz.length;i++){
+      console.log(this.allQuiz[i].textContent)
+      if (this.allQuiz[i].textContent.trim().toLowerCase() === data.vietnamese.trim().toLowerCase() || this.allQuiz[i].textContent.trim().toLowerCase() === data.vocab.trim().toLowerCase())
+        {
+          this.pickEl = this.allQuiz[i];
+          console.log("dung")
+          break
+        }
+      }
     if(this.click ===0){
       this.removeEvent();
       
-      // console.log(event)
-      // const target = event.target
-      // console.log(event.target)
-      
-      // if(this.bingo.trim() === value){
-      //   target.classList.add("bg-success")
-      //   this.score += 100
-      // }
-      // else{   
-      //   target.classList.add("bg-danger")
-      // }
       if(data.vocab.trim().toLowerCase() === this.question.vocab.trim().toLowerCase())
         {
-          alert("dung roi")
+          
+          this.pickEl.classList.add("bg-success")
           this.score +=100;
+          this.scoreEvent.emit(this.score)
         }
-      this.scoreEvent.emit(this.score)
+      else{
+        this.pickEl.classList.add("bg-danger")
+      }
+     
     }
     else{
       alert("vui long chuyen sang cau khac")
