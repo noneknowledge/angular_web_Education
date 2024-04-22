@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LessionService } from 'src/app/Services/lession.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/Services/login.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-lession-outline',
@@ -16,7 +17,7 @@ export class LessionOutlineComponent implements OnInit {
   canComment:boolean = false
   canTest:boolean = false
 
-  constructor(private service:LessionService, private ActiveRoute:ActivatedRoute, private route:Router, private loginService:LoginService){}
+  constructor(private service:LessionService, private ActiveRoute:ActivatedRoute, private router:Router, private loginService:LoginService){}
   ngOnInit(): void {
     this.token = this.loginService.getToken()
     this.ActiveRoute.paramMap.subscribe(params=>{
@@ -26,14 +27,23 @@ export class LessionOutlineComponent implements OnInit {
       this.service.getLessionOutLine(this.lessionId,this.token).subscribe(data=>{
         if (data ===null){
           alert("khong tim thay cai nay")
-          this.route.navigate(["/"])
+          this.router.navigate(["/"])
         }
         this.response = data
         this.canComment = this.response.canComment
         this.canTest = this.response.canTest
 
         console.log(data)
-      })
+      },
+      (error:HttpErrorResponse) => {
+        console.log(error.status)
+       
+        if (error.status === 500)
+          {
+            this.router.navigate(["interval-error"])
+          }
+      }
+    )
     })
   }
 
@@ -43,7 +53,7 @@ export class LessionOutlineComponent implements OnInit {
     console.log(this.token)
     console.log("token")
     if (this.token === null){
-      this.route.navigate(['login'])
+      this.router.navigate(['login'])
       return
     }
     if (this.canTest === false){
@@ -52,6 +62,6 @@ export class LessionOutlineComponent implements OnInit {
     }
 
     console.log("id: " + this.lessionId)
-    this.route.navigate([`lession/${this.lessionId}`])
+    this.router.navigate([`lession/${this.lessionId}`])
   }
 }

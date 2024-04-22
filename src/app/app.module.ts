@@ -24,6 +24,7 @@ import { LessionOutlineComponent } from './Pages/lession-outline/lession-outline
 import { LessionInstructionsComponent } from './Pages/lession-instructions/lession-instructions.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { ReadingComponent } from './Components/reading/reading.component';
+import { IntervalServerErrorComponent } from './Pages/interval-server-error/interval-server-error.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ReadingComponent } from './Components/reading/reading.component';
     LessionOutlineComponent,
     LessionInstructionsComponent,
     ProfileComponent,
-    ReadingComponent
+    ReadingComponent,
+    IntervalServerErrorComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { LoginComponent } from './Pages/login/login.component';
 import { LessionOutlineComponent } from './Pages/lession-outline/lession-outline.component';
 import { LessionInstructionsComponent } from './Pages/lession-instructions/lession-instructions.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
+import { IntervalServerErrorComponent } from './Pages/interval-server-error/interval-server-error.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'lession/:id', component: LessionComponent },
+  {path: 'interval-error', component: IntervalServerErrorComponent},
   {path: '**', component: PageNotFoundComponent},
   
 ];

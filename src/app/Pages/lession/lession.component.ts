@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { LessionService } from 'src/app/Services/lession.service';
 import { LoginService } from 'src/app/Services/login.service';
@@ -26,7 +26,7 @@ export class LessionComponent implements OnInit, AfterViewInit{
   current:any
   randInt:number = 1
   
-  constructor( private userService:UserService,private loginService:LoginService ,private service:LessionService, private mytool :MytoolService, private activatedRoute:ActivatedRoute){}
+  constructor( private router:Router,private userService:UserService,private loginService:LoginService ,private service:LessionService, private mytool :MytoolService, private activatedRoute:ActivatedRoute){}
   
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params =>{
@@ -91,6 +91,8 @@ export class LessionComponent implements OnInit, AfterViewInit{
       var body = {Score: this.score, LessionID:this.lessionId, Comment:""}
       this.userService.updateLessionScore(body,token).subscribe(response=>{
         console.log(response)
+        this.router.navigate([`/course`])
+
       })
       return ;
     }
