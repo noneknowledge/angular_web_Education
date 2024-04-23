@@ -91,7 +91,7 @@ export class LessionComponent implements OnInit, AfterViewInit{
       var body = {Score: this.score, LessionID:this.lessionId, Comment:""}
       this.userService.updateLessionScore(body,token).subscribe(response=>{
         console.log(response)
-        this.router.navigate([`/course`])
+        this.router.navigate([`/outline/${this.lessionId}`])
 
       })
       return ;

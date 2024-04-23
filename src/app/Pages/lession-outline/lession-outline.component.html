@@ -5,7 +5,7 @@
             <div class="col-6 border border-info p-3">
                 <div>
                     <h1>
-                        Top 10 highest score: 
+                        Bảng xếp hạng 
                     </h1>  
                     <div class="mt-4">
                     <main>
@@ -13,20 +13,23 @@
                             <h1>Ranking</h1>
                          
                             <button class="share">
-                              <strong>Top 5</strong>
+                              <strong>Top {{this.topRanks.length}}</strong>
                             </button>
                           </div>
                           <div id="leaderboard">
                             <div class="ribbon"></div>
                             <table>
-                              <tr>
-                                <td class="number">1</td>
-                                <td class="name">Lee Taeyong</td>
+                              <tr *ngIf="this.topRanks.length === 0">
+                                <td>Chưa có ai trên bảng xếp hạng.</td>
+                              </tr>
+                              <tr *ngFor="let rank of topRanks;index as i">
+                                <td class="number">{{i + 1}}</td>
+                                <td class="name">{{rank.userName}}</td>
                                 <td class="points">
-                                  258.244 <img class="gold-medal" src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true" alt="gold medal"/>
+                                  {{rank.score}} <img *ngIf="i === 0 " class="gold-medal" src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true" alt="gold medal"/>
                                 </td>
                               </tr>
-                              <tr>
+                              <!-- <tr>
                                 <td class="number">2</td>
                                 <td class="name">Mark Lee</td>
                                 <td class="points">258.242</td>
@@ -45,7 +48,7 @@
                                 <td class="number">5</td>
                                 <td class="name">Johnny Suh</td>
                                 <td class="points">258.208</td>
-                              </tr>
+                              </tr> -->
                             </table>
                             
                           </div>
@@ -53,17 +56,17 @@
                     </div>
                 </div>
                 <div class="mt-5">
-                    <h1>Comment Section: </h1>
+                    <h1>Khu vực bình luận </h1>
                         <div class="p-4">
                           <div  *ngIf="userName!== ''">
-                            <h2 *ngIf="!canComment"> Hoàn thành bài tập mới comment được</h2>
-                            <div [style.pointer-events]="canComment ? 'none' : 'auto'" class="card bg-light">
+                            <h2 *ngIf="!canComment"> Hoàn thành bài tập ở mức trên 1000 điểm mới comment được</h2>
+                            <div [style.pointer-events]="!canComment ? 'none' : 'auto'" class="card bg-light">
                                 <header class="card-header border-0 bg-transparent">
                                   <img
                                     src="https://via.placeholder.com/40x40"
                                     class="rounded-circle me-2"
                                   /><a class="fw-semibold text-decoration-none">JohnDoe</a>
-                                  <!-- <span class="ms-3 small text-muted">2 months ago</span> -->
+                                 
                                 </header>
                                 <div class="card-body py-1">
                                   <form>
@@ -86,23 +89,23 @@
                                 </div>
                                 <footer class="card-footer bg-transparent border-0 text-end">
                                   <button (click)="myTextArea.value = ''" class="btn btn-link btn-sm me-2 text-decoration-none">
-                                    Cancel
+                                    Hủy
                                   </button>
                                   <button
                                     (click)="sendComment(myTextArea.value)"
                                     type="submit"
                                     class="btn btn-primary btn-sm"
                                   >
-                                    Submit
+                                    Gửi
                                   </button>
                                 </footer>
                               </div>
                           </div>
                             
                               <aside class="d-flex justify-content-between align-items-center my-4">
-                                <h4 class="h6">{{response.comments.length}} Comments</h4>
+                                <h4 class="h6">{{comments.length}} Comments / Bình luận</h4>
                                 </aside>
-                                <article class="card bg-light">
+                                <!-- <article class="card bg-light mb-4">
                                     <header class="card-header border-0 bg-transparent d-flex align-items-center">
                                       <div>
                                       <img
@@ -122,6 +125,32 @@
                                     </header>
                                     <div class="card-body py-2 px-3">
                                       some text asdlaksd asndasd allal ? asdfasd lkakdaa akla akdn adnot!
+                                    </div>
+                                    <footer class="card-footer bg-white border-0 py-1 px-3">
+                                     
+                                    </footer>
+                                  </article> -->
+                                  <article *ngFor="let comment of comments" class="card bg-light mb-4">
+                                    <header class="card-header border-0 bg-transparent d-flex align-items-center">
+                                      <div>
+                                      <img
+                             
+                                        src="https://via.placeholder.com/40x40"
+                                        class="rounded-circle me-2"
+                                      /><a class="fw-semibold text-decoration-none">{{comment.userName}}</a>
+                                      <span class="ms-3 small text-muted">{{dateFromNow(comment.commentDate)}}</span>
+                                      </div>
+                                      <div class="dropdown ms-auto">
+                                      <!-- <button class="btn btn-link text-decoration-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <i class="bi bi-three-dots-vertical"></i>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Report</a></li>
+                                      </ul> -->
+                                    </div>
+                                    </header>
+                                    <div class="card-body py-2 px-3">
+                                      {{comment.comment}}
                                     </div>
                                     <footer class="card-footer bg-white border-0 py-1 px-3">
                                       <!-- <button
@@ -146,7 +175,7 @@
                 </div>
                
             </div>
-            <div class="col-6 border border-danger">
+            <div class="col-6 p-2 border border-danger">
                 <div>
                     <img style="max-height:100%; max-width:100%;object-fit: contain;" src="{{response.image}}" alt = "{{response.title}}">
                     <h1 class="pt-4">
@@ -156,10 +185,10 @@
                 </div>
                 <div class="border p-5 m-3">
                     <h1>
-                        Intructions
+                        Bài học
                     </h1>
                     <h1>
-                       <button (click)="startTest()">Start your test</button>
+                       <button (click)="startTest()">Bắt đầu kiểm tra</button>
                     </h1>
                 </div>
                 <hr>
@@ -168,11 +197,10 @@
                   <div *ngIf="response.userScore !== null" class="p-4 border rounded">
                     <div class="d-flex justify-content-center">
                       <img src="https://cdn3.vectorstock.com/i/1000x1000/95/72/business-avatar-icon-abstract-triangle-vector-4269572.jpg" style="width: 50px;height: 50px;">
-                      <h3 class="m-3">Ten nguoi dung</h3>
+                      <h3 class="m-3">{{userName}}</h3>
                     </div>
-                  
-                    <div class="p-1 px-4 d-flex flex-column align-items-center score rounded-pill">
-                      <span class="d-block char text-success">1500</span>
+                    <div [ngClass]="(response.userScore.score === 1500) ? 'perfect-score' : (response.userScore.score >= 1100) ? 'good-score' : (response.userScore.score >= 800) ? 'normal-score': 'bad-score'" class="p-1 px-4 d-flex flex-column align-items-center score rounded-pill">
+                      <span class="d-block char"><strong>{{response.userScore.score}}</strong></span>
                       <span class="text-center">--</span>
                       <span class="text-success">1500</span>
                     </div>
@@ -186,6 +214,11 @@
         </div>
     </div>
    <div *ngIf="response === undefined">
-        Loading...
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-info" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    
    </div>
 </div>

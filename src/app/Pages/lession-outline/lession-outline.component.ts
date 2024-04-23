@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/Services/login.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from 'src/app/Services/user.service';
+import { formatDistanceToNow,isToday } from 'date-fns';
+import { vi } from 'date-fns/locale';
+
 
 @Component({
   selector: 'app-lession-outline',
@@ -19,25 +22,26 @@ export class LessionOutlineComponent implements OnInit {
   canTest:boolean = false
   userName:string | undefined
   avatarImage:string | undefined
-  
+  comments:any[] = []
+  topRanks:any[] = []
+  testValue=100
 
   constructor(private service:LessionService,private userLessionService: UserService, private ActiveRoute:ActivatedRoute, private router:Router, private loginService:LoginService){}
   ngOnInit(): void {
     this.token = this.loginService.getToken()
     this.userName = this.loginService.getUserName();
-    console.log("Username: " + this.userName)
     this.avatarImage = this.loginService.getAvatar();
     this.ActiveRoute.paramMap.subscribe(params=>{
       this.lessionId = Number(params.get('id'))
-      console.log(this.lessionId)
-      console.log("id")
       this.service.getLessionOutLine(this.lessionId,this.token).subscribe(data=>{
         if (data ===null){
           alert("khong tim thay cai nay")
           this.router.navigate(["/"])
         }
         this.response = data
+        this.comments = this.response.comments
         this.canComment = this.response.canComment
+        this.topRanks = this.response.topRank
         this.canTest = this.response.canTest
 
         console.log(data)
@@ -63,8 +67,22 @@ export class LessionOutlineComponent implements OnInit {
     }
     this.userLessionService.updateComment(body,this.token).subscribe(response =>{
       console.log(response)
+
+      let date = new Date()
+      let dateOnly = date.toISOString().split("T")[0]
+      var newComment = {avatarImage: this.avatarImage, userName:this.userName,comment:textAreaValue, commentDate: dateOnly  }
+      this.comments.unshift(newComment)
     })
   }
+
+  dateFromNow(date:Date){
+    if(isToday(date)) return "Hôm nay"
+
+    let distance = formatDistanceToNow(date, { addSuffix: true, locale: vi });
+    
+    return distance
+  }
+
   startTest(){
     
     if (this.token === null){

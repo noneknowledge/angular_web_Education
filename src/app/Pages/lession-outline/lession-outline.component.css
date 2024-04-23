@@ -205,7 +205,25 @@ main {
   }
 
 
-  .score{
+.score{
 
     background-color: #B9F6CA;
 }
+
+.perfect-score{
+  background-color: #B9F6CA;
+}
+
+.good-score{
+background-color: #97E7E1;
+}
+
+.normal-score{
+background-color: #FFF455;
+}
+
+.bad-score{
+  background-color:#FA7070;
+}
+
+
