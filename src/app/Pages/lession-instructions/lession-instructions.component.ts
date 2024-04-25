@@ -12,6 +12,8 @@ export class LessionInstructionsComponent implements OnInit {
   lessionId:any
   response:any
 
+  currentTab = "Grammar"
+
   constructor(private service:LessionService, private route:ActivatedRoute, private navigate:Router){}
 
   ngOnInit(): void {
@@ -30,5 +32,9 @@ export class LessionInstructionsComponent implements OnInit {
         console.warn(error.message)
       })
     })
+  }
+  changeTab(event:any){
+    this.currentTab = event.target.innerHTML
+    
   }
 }

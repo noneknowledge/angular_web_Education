@@ -1,1 +1,78 @@
-<p>lession-instructions works!</p>
+<div class="container border rounded" style="height: 80%;">
+    <div class="row m-3 border border-danger" style="height: 100%;">
+        <div class="col-3 border border-success d-flex flex-column" style="height: 95%;">
+            <h3 (click)="changeTab($event)" [ngClass]="(currentTab==='Vocab')?'tabActive':null"  class="text-center test mt-5 p-2 " >Vocab</h3>
+            <h3 (click)="changeTab($event)" [ngClass]="(currentTab==='Grammar')?'tabActive':null" class="text-center  test mt-5 p-2 " >Grammar</h3>
+            <!-- <h3 (click)="changeTab($event)" [ngClass]="(currentTab==='Reading')?'tabActive':null" class="text-center  test mt-5 p-2 " >Reading</h3> -->
+        </div>
+        <div class="col-8 border border-info" style="height: 95%;">
+            <div *ngIf="currentTab === 'Vocab'" style="height:100%" class="overflow-scroll">
+                Vocab
+                We all have a story to tell – isn’t it about time yours was heard? Join a writing retreat and hone your craft in a supportive and relaxed atmosphere. Unlock your potential with practical advice on everything from finding your unique voice to character development, self-publishing and overcoming writers’ block. Writing retreats can naturally be combined with exploring a new territory as you re-discover yourself and it is sure to get the creative juices flowing.
+
+                Destinations:
+                Andalusia, Spain.
+                Program Dates: July 17 to 30, 2023
+                Kuala Lumpur, Malaysia
+                Program Dates: July 17 to 30, 2024
+                This small intimate group will be limited to 8 participants. Please call for more details.
+                Program Prices
+                Writers $7,395 + tax (Includes airfare, 2 guests sharing a room, workshop, and a country tour in a train or bus).
+                
+                Reservation
+                20% down payment ($1,479) is required to hold a seat.
+                
+                Call us at (919) 346-4907‬ or email at info@write-a-book.org.We all have a story to tell – isn’t it about time yours was heard? Join a writing retreat and hone your craft in a supportive and relaxed atmosphere. Unlock your potential with practical advice on everything from finding your unique voice to character development, self-publishing and overcoming writers’ block. Writing retreats can naturally be combined with exploring a new territory as you re-discover yourself and it is sure to get the creative juices flowing.
+
+                Destinations:
+                Andalusia, Spain.
+                Program Dates: July 17 to 30, 2023
+                Kuala Lumpur, Malaysia
+                Program Dates: July 17 to 30, 2024
+                This small intimate group will be limited to 8 participants. Please call for more details.
+                Program Prices
+                Writers $7,395 + tax (Includes airfare, 2 guests sharing a room, workshop, and a country tour in a train or bus).
+                
+                Reservation
+                20% down payment ($1,479) is required to hold a seat.
+                
+                Call us at (919) 346-4907‬ or email at info@write-a-book.org.We all have a story to tell – isn’t it about time yours was heard? Join a writing retreat and hone your craft in a supportive and relaxed atmosphere. Unlock your potential with practical advice on everything from finding your unique voice to character development, self-publishing and overcoming writers’ block. Writing retreats can naturally be combined with exploring a new territory as you re-discover yourself and it is sure to get the creative juices flowing.
+
+                Destinations:
+                Andalusia, Spain.
+                Program Dates: July 17 to 30, 2023We all have a story to tell – isn’t it about time yours was heard? Join a writing retreat and hone your craft in a supportive and relaxed atmosphere. Unlock your potential with practical advice on everything from finding your unique voice to character development, self-publishing and overcoming writers’ block. Writing retreats can naturally be combined with exploring a new territory as you re-discover yourself and it is sure to get the creative juices flowing.
+
+                Destinations:
+                Andalusia, Spain.
+                Program Dates: July 17 to 30, 2023
+                Kuala Lumpur, Malaysia
+                Program Dates: July 17 to 30, 2024
+                This small intimate group will be limited to 8 participants. Please call for more details.
+                Program Prices
+                Writers $7,395 + tax (Includes airfare, 2 guests sharing a room, workshop, and a country tour in a train or bus).
+                
+                Reservation
+                20% down payment ($1,479) is required to hold a seat.
+                
+                Call us at (919) 346-4907‬ or email at info@write-a-book.org.
+                Kuala Lumpur, Malaysia
+                Program Dates: July 17 to 30, 2024
+                This small intimate group will be limited to 8 participants. Please call for more details.
+                Program Prices
+                Writers $7,395 + tax (Includes airfare, 2 guests sharing a room, workshop, and a country tour in a train or bus).
+                
+                Reservation
+                20% down payment ($1,479) is required to hold a seat.
+                
+                Call us at (919) 346-4907‬ or email at info@write-a-book.org.
+            </div>  
+        
+            <div *ngIf="currentTab === 'Grammar'">
+                Grammar
+            </div> 
+        
+        </div>
+    </div>
+    
+   
+</div>

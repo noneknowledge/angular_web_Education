@@ -82,7 +82,7 @@ export class LessionComponent implements OnInit, AfterViewInit{
   }
   nextClick(){
     // this.stopInterval() 
-    // this.randInt = this.mytool.getRandomInt(2)
+    this.randInt = this.mytool.getRandomInt(2)
     this.index ++;
 
     // this.startInterval();

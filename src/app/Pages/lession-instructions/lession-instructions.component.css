@@ -1,0 +1,17 @@
+.test.tabActive {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: white;
+    color: black;
+  }
+
+
+  /* Style cho border cả 4 góc */
+.test {
+   color:rgb(165, 241, 238);
+    border: 2px solid black;
+    border-radius: 50px;
+    background-color: rgb(146, 145, 145);
+  }
+  
