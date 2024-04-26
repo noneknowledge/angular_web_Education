@@ -4,37 +4,35 @@ import { LessionService } from 'src/app/Services/lession.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-lession-instructions',
-  templateUrl: './lession-instructions.component.html',
-  styleUrls: ['./lession-instructions.component.css']
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.css']
 })
-export class LessionInstructionsComponent implements OnInit {
-  lessionId:any
-  response:any
+export class TestComponent {
 
-  currentTab = "Vocab"
+  lessionId:any
+  type:any  
+  status:any
 
   constructor(private service:LessionService, private route:ActivatedRoute, private navigate:Router){}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=>{
       this.lessionId = params.get('id')
+      this.type = params.get('type')
+      this.status = params.get('status')      
       console.log(this.lessionId)
+      console.log(this.type)
       console.log("id")
-      this.service.getLessionOutLine(this.lessionId).subscribe(data=>{
-        if (data ===null){
+      this.service.getLessionOutLine(this.lessionId).subscribe(response=>{
+        if (response === null){
           alert("khong tim thay cai nay")
           this.navigate.navigate(["/"])
         }
-        this.response = data
-        console.log(this.response)
+        console.log(response)
       },error=>{
         console.warn(error.message)
       })
     })
-  }
-  changeTab(event:any){
-    this.currentTab = event.target.innerHTML
-    
   }
 }

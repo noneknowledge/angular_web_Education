@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="p-3">
+        <hr>
+        <h1 class="text-center"> Lession {{lessionId}}: Kiểm tra </h1>
+        <div class="m-3 d-flex justify-content-between">
+            <h3>Vocab</h3>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-danger" (click)="showModal('vocab')">Làm lại từ đầu <i class="fa-solid fa-repeat"></i></button>
+                <div class="vr mx-3"></div>
+                <button class="btn btn-success" routerLink="/test/{{lessionId}}/vocab/keep">Tiếp tục <i class="fa-solid fa-play"></i></button>
+            </div>
+           
+        </div>
+        <div class="progress">
+        <div class="progress" style="width: 100%">
+            
+            <div class="progress-bar bg-success"
+                style="width: 20%">20%
+            </div>
+            <div class="progress-bar bg-danger 
+                progress-bar-stripped" style="width: 30%">
+                30%
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="p-3">
+        <hr>
+        <div class="m-3 d-flex justify-content-between">
+            <h3>Reading</h3>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-danger" (click)="showModal('reading')" >Làm lại từ đầu <i class="fa-solid fa-repeat"></i></button>
+                <div class="vr mx-3"></div>
+                <button class="btn btn-success" routerLink="/test/{{lessionId}}/reading/keep">Tiếp tục <i class="fa-solid fa-play"></i></button>
+            </div>
+           
+        </div>
+        <div class="progress">
+        <div class="progress" style="width: 100%">
+            
+            <div class="progress-bar bg-success"
+                style="width: 20%">20%
+            </div>
+            <div class="progress-bar bg-danger 
+                progress-bar-stripped" style="width: 30%">
+                30%
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="p-3">
+        <hr>
+        <div class="m-3 d-flex justify-content-between">
+            <h3>Sentence</h3>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-danger" (click)="showModal('sentence')" >Làm lại từ đầu <i class="fa-solid fa-repeat"></i></button>
+                <div class="vr mx-3"></div>
+                <button class="btn btn-success" routerLink="/test/{{lessionId}}/sentence/keep">Tiếp tục <i class="fa-solid fa-play"></i></button>
+            </div>
+           
+        </div>
+        <div class="progress">
+        <div class="progress" style="width: 100%">
+            
+            <div class="progress-bar bg-success"
+                style="width: 20%">20%
+            </div>
+            <div class="progress-bar bg-danger 
+                progress-bar-stripped" style="width: 30%">
+                30%
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="p-3">
+        <hr>
+        <div class="d-flex justify-content-between">
+            <h3>Luyện tập</h3>
+            <button class="btn btn-primary">Bắt đầu</button>
+        </div>
+      
+    </div>
+    
+</div>
+
+
+<div *ngIf="redoPart !== ''" class="border rounded fixed-top" style="width: 50%;margin: auto; background-color: white;">
+    <h2 class="text-center bg-primary text-white p-2">Modal</h2>
+    <hr>
+    <div class="mx-4">
+        <h3 class="text-center">Thông báo</h3>
+        <h4> Bạn có thực sự muốn làm lại mục {{redoPart}} của lession {{lessionId}}</h4>
+    </div>
+    <hr>
+    <div class="d-flex flex-row-reverse">
+      
+        <button class="btn btn-success mx-3" (click)="confirm()" >Xác nhận</button>
+        <button class="btn btn-danger mx-2" (click)="closeModal()" >Hủy</button>
+    </div>
+
+</div>

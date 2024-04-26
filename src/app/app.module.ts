@@ -25,6 +25,8 @@ import { LessionInstructionsComponent } from './Pages/lession-instructions/lessi
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { ReadingComponent } from './Components/reading/reading.component';
 import { IntervalServerErrorComponent } from './Pages/interval-server-error/interval-server-error.component';
+import { TestOutlineComponent } from './Pages/test-outline/test-outline.component';
+import { TestComponent } from './Pages/test/test.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { IntervalServerErrorComponent } from './Pages/interval-server-error/inte
     LessionInstructionsComponent,
     ProfileComponent,
     ReadingComponent,
-    IntervalServerErrorComponent
+    IntervalServerErrorComponent,
+    TestOutlineComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

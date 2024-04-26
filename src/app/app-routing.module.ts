@@ -11,6 +11,8 @@ import { LessionOutlineComponent } from './Pages/lession-outline/lession-outline
 import { LessionInstructionsComponent } from './Pages/lession-instructions/lession-instructions.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { IntervalServerErrorComponent } from './Pages/interval-server-error/interval-server-error.component';
+import { TestOutlineComponent } from './Pages/test-outline/test-outline.component';
+import { TestComponent } from './Pages/test/test.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path: 'instruction/:id', component: LessionInstructionsComponent},
   {path: 'course', component: CourseComponent},
   {path: 'login', component: LoginComponent},
+  {path:'testoutline/:id',component:TestOutlineComponent},
+  {path:'test/:id/:type/:status',component:TestComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'lession/:id', component: LessionComponent },
   {path: 'interval-error', component: IntervalServerErrorComponent},
