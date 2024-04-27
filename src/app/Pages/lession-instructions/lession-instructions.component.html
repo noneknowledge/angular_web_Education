@@ -1,74 +1,60 @@
 <div class="container border rounded" style="height: 80%;">
+    <h1 class="text-center">Lession {{lessionId}}</h1>
     <div class="row m-3 border border-danger" style="height: 100%;">
         <div class="col-3 border border-success d-flex flex-column" style="height: 95%;">
             <h3 (click)="changeTab($event)" [ngClass]="(currentTab==='Vocab')?'tabActive':null"  class="text-center test mt-5 p-2 " >Vocab</h3>
             <h3 (click)="changeTab($event)" [ngClass]="(currentTab==='Grammar')?'tabActive':null" class="text-center  test mt-5 p-2 " >Grammar</h3>
             <!-- <h3 (click)="changeTab($event)" [ngClass]="(currentTab==='Reading')?'tabActive':null" class="text-center  test mt-5 p-2 " >Reading</h3> -->
+            
         </div>
         <div class="col-8 border border-info" style="height: 95%;">
             <div *ngIf="currentTab === 'Vocab'" style="height:100%" class="overflow-scroll">
-                Vocab
-                We all have a story to tell – isn’t it about time yours was heard? Join a writing retreat and hone your craft in a supportive and relaxed atmosphere. Unlock your potential with practical advice on everything from finding your unique voice to character development, self-publishing and overcoming writers’ block. Writing retreats can naturally be combined with exploring a new territory as you re-discover yourself and it is sure to get the creative juices flowing.
+                <h2 class="text-center">Vocab</h2>
                 
-                Destinations:
-                Andalusia, Spain.
-                Program Dates: July 17 to 30, 2023
-                Kuala Lumpur, Malaysia
-                Program Dates: July 17 to 30, 2024
-                This small intimate group will be limited to 8 participants. Please call for more details.
-                Program Prices
-                Writers $7,395 + tax (Includes airfare, 2 guests sharing a room, workshop, and a country tour in a train or bus).
-                
-                Reservation
-                20% down payment ($1,479) is required to hold a seat.
-                
-                Call us at (919) 346-4907‬ or email at info@write-a-book.org.We all have a story to tell – isn’t it about time yours was heard? Join a writing retreat and hone your craft in a supportive and relaxed atmosphere. Unlock your potential with practical advice on everything from finding your unique voice to character development, self-publishing and overcoming writers’ block. Writing retreats can naturally be combined with exploring a new territory as you re-discover yourself and it is sure to get the creative juices flowing.
 
-                Destinations:
-                Andalusia, Spain.
-                Program Dates: July 17 to 30, 2023
-                Kuala Lumpur, Malaysia
-                Program Dates: July 17 to 30, 2024
-                This small intimate group will be limited to 8 participants. Please call for more details.
-                Program Prices
-                Writers $7,395 + tax (Includes airfare, 2 guests sharing a room, workshop, and a country tour in a train or bus).
-                
-                Reservation
-                20% down payment ($1,479) is required to hold a seat.
-                
-                Call us at (919) 346-4907‬ or email at info@write-a-book.org.We all have a story to tell – isn’t it about time yours was heard? Join a writing retreat and hone your craft in a supportive and relaxed atmosphere. Unlock your potential with practical advice on everything from finding your unique voice to character development, self-publishing and overcoming writers’ block. Writing retreats can naturally be combined with exploring a new territory as you re-discover yourself and it is sure to get the creative juices flowing.
+                <div *ngIf="response === undefined" class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                <div class="my-4" *ngIf="response !== undefined">
+                    <hr>
+                    <div class="my-3 p-3 border rounded bg-info text-white d-flex justify-content-around">
+                        <h3>Chọn accent phát âm:</h3>
 
-                Destinations:
-                Andalusia, Spain.
-                Program Dates: July 17 to 30, 2023We all have a story to tell – isn’t it about time yours was heard? Join a writing retreat and hone your craft in a supportive and relaxed atmosphere. Unlock your potential with practical advice on everything from finding your unique voice to character development, self-publishing and overcoming writers’ block. Writing retreats can naturally be combined with exploring a new territory as you re-discover yourself and it is sure to get the creative juices flowing.
-
-                Destinations:
-                Andalusia, Spain.
-                Program Dates: July 17 to 30, 2023
-                Kuala Lumpur, Malaysia
-                Program Dates: July 17 to 30, 2024
-                This small intimate group will be limited to 8 participants. Please call for more details.
-                Program Prices
-                Writers $7,395 + tax (Includes airfare, 2 guests sharing a room, workshop, and a country tour in a train or bus).
-                
-                Reservation
-                20% down payment ($1,479) is required to hold a seat.
-                
-                Call us at (919) 346-4907‬ or email at info@write-a-book.org.
-                Kuala Lumpur, Malaysia
-                Program Dates: July 17 to 30, 2024
-                This small intimate group will be limited to 8 participants. Please call for more details.
-                Program Prices
-                Writers $7,395 + tax (Includes airfare, 2 guests sharing a room, workshop, and a country tour in a train or bus).
-                
-                Reservation
-                20% down payment ($1,479) is required to hold a seat.
-                
-                Call us at (919) 346-4907‬ or email at info@write-a-book.org.
+                     <select [(ngModel)]="selectedVoice" >
+                        <option *ngFor="let voice of voices; index as i" [value]="i">{{voice.name}}</option>
+                      </select>
+                    </div>
+                    
+                    <div class="row m-3" >
+                        <div class="col-2  text-center "><h3>Hình ảnh</h3></div>
+                        <div class="col-3 text-center"><h3>Vocab/ Vietnamese</h3></div>
+                        <div class="col-3"><h3>Phân loại từ</h3></div>
+                        <div class="col-3"><h3>Phát âm</h3></div>
+                    </div>
+                    <div class="row my-5 mx-4" *ngFor="let vocab of response.vocabularies">
+                        <img class="col-2 " style="object-fit: cover;width: 100px;" src="{{vocab.image}}" class="img-thumbnail" alt="vocab.vocab">
+                        <div class="col-4 text-center d-flex flex-column">
+                            <p>{{vocab.vocab}}</p>
+                            <p>{{vocab.vietnamese}}</p>
+                        </div>
+                        <div class="col-3">{{vocab.wordClass}}</div>
+                        <div class="col-3 "><button class="text-center btn btn-primary" (click)="speak(vocab.vocab)">Speaker</button></div>
+                        <hr>
+                    </div>
+                </div>
+               
             </div>  
         
             <div *ngIf="currentTab === 'Grammar'">
-                Grammar
+                <h2 class="text-center">Grammar</h2>
+                <div *ngIf="response === undefined" class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                <div *ngIf="response !== undefined">
+                    <div *ngFor="let grammar of response.grammars">
+
+                    </div>
+                </div>
             </div> 
         
         </div>

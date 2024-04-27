@@ -42,6 +42,8 @@ export class LessionService {
     const url = `${this.restfulAPI}/instruction/${id}`
     return this.httpClient.get(url,this.httpOptions);
   }
+  
+
   getLession(id:number){
     const url = `${this.restfulAPI}/${id}`
     return this.httpClient.get(url,this.httpOptions);
