@@ -1,6 +1,6 @@
-import { Token } from '@angular/compiler';
+
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { Subject } from 'rxjs';
 
 @Injectable({

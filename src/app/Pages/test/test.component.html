@@ -1,5 +1,38 @@
 
 <div class="container">
     <p>test works!</p>
-    <h1>lessionId: {{lessionId}}. Type: {{type}}. Status: {{status}}</h1>
+    
+    <div *ngIf="response !== undefined">
+        <h1>Score: {{index}}/{{response.length}}</h1>
+        <h1>lessionId: {{lessionId}}. Type: {{type}}. Status: {{status}}</h1>
+        <div *ngIf="type==='vocab'">
+            Vocab
+            <app-quiz class="game" (scoreEvent)="score=$event" [score]="score" [lessionVocabs]="vocabs" [inputQuiz]="current"></app-quiz>
+            <div class='text-center'>
+                <button class="text btn btn-primary" (click)="nextQuestion()">Câu tiếp theo</button>
+            </div>
+        </div>
+    
+        <div *ngIf="type==='reading'">
+            reading
+            <div class='text-center'>
+                <button class="text btn btn-primary">Câu tiếp theo</button>
+            </div>
+        </div>
+    
+        <div *ngIf="type==='sentence'">
+            Sentence
+            <div class='text-center'>
+                <button class="text btn btn-primary">Câu tiếp theo</button>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="response === undefined">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </div>
+    
+
 </div>
