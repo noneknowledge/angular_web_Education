@@ -95,6 +95,6 @@ export class LessionOutlineComponent implements OnInit {
     }
 
     console.log("id: " + this.lessionId)
-    this.router.navigate([`lession/${this.lessionId}`])
+    this.router.navigate([`testoutline/${this.lessionId}`])
   }
 }

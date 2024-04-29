@@ -1,12 +1,12 @@
 
 <div class="container">
-    <p>test works!</p>
+    
     
     <div *ngIf="response !== undefined">
-        <h1>Score: {{index}}/{{response.length}}</h1>
-        <h1>lessionId: {{lessionId}}. Type: {{type}}. Status: {{status}}</h1>
+        <h1>Câu hỏi hiện tại: {{index}}/{{response.length}}</h1>
+
         <div *ngIf="type==='vocab'">
-            Vocab
+         
             <app-quiz class="game" (scoreEvent)="score=$event" [score]="score" [lessionVocabs]="vocabs" [inputQuiz]="current"></app-quiz>
             <div class='text-center'>
                 <button class="text btn btn-primary" (click)="nextQuestion()">Câu tiếp theo</button>
@@ -14,16 +14,23 @@
         </div>
     
         <div *ngIf="type==='reading'">
-            reading
+           
+            <app-reading class="game" (scoreEvent)="score=$event" [score]="score" [inputQuiz]="current"></app-reading>
             <div class='text-center'>
-                <button class="text btn btn-primary">Câu tiếp theo</button>
+                <button class="text btn btn-primary">Kết thúc</button>
             </div>
         </div>
     
         <div *ngIf="type==='sentence'">
-            Sentence
+         
+            <div *ngIf="randInt === 1">
+                <app-scrambled (scoreEvent)="score=$event" [score]="score" [inputQuiz]="current" class="game" ></app-scrambled>
+            </div>
+            <div *ngIf="randInt === 0">
+                <app-blankfill (scoreEvent)="score=$event" [score]="score" [inputQuiz]="current" class="game" ></app-blankfill>
+            </div>
             <div class='text-center'>
-                <button class="text btn btn-primary">Câu tiếp theo</button>
+                <button class="text btn btn-primary" (click)="nextSentence()">Câu tiếp theo</button>
             </div>
         </div>
     </div>

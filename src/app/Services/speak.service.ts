@@ -25,9 +25,7 @@ export class SpeakService {
     if (this.synth.onvoiceschanged !== undefined) {
       this.synth.onvoiceschanged = () => {
         this.voices = this.synth.getVoices();
-        console.log("voice")
-        console.log(this.voices)
-        console.log("voice")
+       
       };
     }
   }

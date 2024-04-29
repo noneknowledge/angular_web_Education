@@ -55,28 +55,68 @@ export class TestComponent {
           
           })
         }
+      else if (this.type!.toLowerCase() === 'sentence'){
+        this.ULservice.getSentence(this.token,this.lessionId,  this.status).subscribe(response=>{
+          if (response === null){
+            alert("khong tim thay cai nay")
+            this.navigate.navigate(["/"])
+          }
+          else{
+            this.response = response
+            this.current = this.response[this.index]
+            console.log(this.response)
+          }
+        
+        })
+      }
+      else if (this.type!.toLowerCase() === 'reading'){
+        this.ULservice.getReading(this.token,this.lessionId,  this.status).subscribe(response=>{
+          if (response === null){
+            alert("khong tim thay cai nay")
+            this.navigate.navigate(["/"])
+          }
+          else{
+            this.response = response
+            this.current = this.response[this.index]
+            console.log(this.response)
+          }
+        
+        })
+      }
      
     })
   }
 
-  nextQuestion(){
-    if(this.type === 'sentence') {
-      this.randInt = this.mytool.getRandomInt(2)
+  nextSentence(){
+    this.randInt = this.mytool.getRandomInt(2)
+    var isTrue = 'false'
+    if(this.score !== this.previousScore){
+      isTrue = 'true'
     }
+    this.previousScore = this.score
+    this.ULservice.updateSentence(this.current.senId,isTrue,this.token).subscribe(response=>{
+      console.log(response)
+    })
+    this.increaseCurrentQuestion()
+
+  }
+  increaseCurrentQuestion(){
+    this.index +=1
+    if (this.index === this.response.length -1) alert("da hết câu hỏi");
+    this.current = this.response[this.index]
+  }
+
+  nextQuestion(){
     var isTrue = "false"
     if(this.score !== this.previousScore){
       isTrue = 'true'
     }
     debugger
     this.previousScore = this.score
-    this.ULservice.updateScore(this.current.vocabId,isTrue,this.token).subscribe(response=>{
+    this.ULservice.updateVocab(this.current.vocabId,isTrue,this.token).subscribe(response=>{
       console.log(response)
     })
+    this.increaseCurrentQuestion()
     
-    this.index +=1
-    if (this.index === this.response.length -1) this.index =0;
-    this.current = this.response[this.index]
-    
-
   }
 }
