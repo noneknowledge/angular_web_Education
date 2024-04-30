@@ -19,6 +19,11 @@ export class LoginService {
     localStorage.setItem("token",JSON.stringify(tokenResponse))
     this.login.next(true)
   }
+  resetServiceValue(){
+    this.userName = ""
+    this.avatar = ""
+    this.token = ""
+  }
   setData(tokenResponse:any){
    
     if (tokenResponse !== null)
@@ -38,7 +43,9 @@ export class LoginService {
     return this.userName
   }
   removeToken(){
+    
     localStorage.removeItem("token")
+    this.resetServiceValue();
     this.login.next(false)
   }
 

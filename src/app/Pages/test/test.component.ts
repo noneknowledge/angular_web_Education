@@ -30,7 +30,7 @@ export class TestComponent {
 
   ngOnInit(): void {
     this.token = this.loginService.getToken();
-    if(this.token === null)
+    if(this.token === "")
       this.navigate.navigate(['/login'])
     this.route.paramMap.subscribe(params=>{
       this.lessionId = params.get('id')

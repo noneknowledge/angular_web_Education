@@ -29,6 +29,7 @@ export class LessionOutlineComponent implements OnInit {
   constructor(private service:LessionService,private userLessionService: UserService, private ActiveRoute:ActivatedRoute, private router:Router, private loginService:LoginService){}
   ngOnInit(): void {
     this.token = this.loginService.getToken()
+ 
     this.userName = this.loginService.getUserName();
     this.avatarImage = this.loginService.getAvatar();
     this.ActiveRoute.paramMap.subscribe(params=>{
@@ -85,7 +86,7 @@ export class LessionOutlineComponent implements OnInit {
 
   startTest(){
     
-    if (this.token === null){
+    if (this.token === ""){
       this.router.navigate(['login'])
       return
     }

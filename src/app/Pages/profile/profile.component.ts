@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit{
   ngOnInit(): void {
     var token = this.loginService.getToken()
     console.log(token)
-    if (token ===null){
+    if (token === ""){
       this.router.navigate(['login'])
       return
     }

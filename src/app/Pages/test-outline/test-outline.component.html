@@ -15,7 +15,7 @@
         <div class="progress" style="width: 100%">
             
             <div class="progress-bar bg-success"
-                style="width: {{vocabPercent}}%">{{vocabPercent}}%
+                [style.width]= "vocabPercent +'%'">{{vocabPercent}}%
             </div>
             <!-- <div class="progress-bar bg-danger 
                 progress-bar-stripped" style="width: 30%">
@@ -40,7 +40,7 @@
         <div class="progress" style="width: 100%">
             
             <div class="progress-bar bg-success"
-                style="width: {{readPercent}}%">{{readPercent}}%
+            [style.width]= "readPercent +'%'">{{readPercent}}%
             </div>
             <!-- <div class="progress-bar bg-danger 
                 progress-bar-stripped" style="width: 30%">
@@ -64,7 +64,7 @@
         <div class="progress" style="width: 100%">
             
             <div class="progress-bar bg-success"
-                style="width:{{senPercent}}">{{senPercent}}%
+            [style.width]= "senPercent +'%'">{{senPercent}}%
             </div>
             <!-- <div class="progress-bar bg-danger 
                 progress-bar-stripped" style="width: 30%">
