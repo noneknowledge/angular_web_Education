@@ -58,13 +58,14 @@ export class UserLessionService {
     })
     return this.httpClient.get(url,{headers:header})
   }
-  updateReading(readingId:number,isTrue:string,token:any){
+  updateReading(readingId:number,isTrue:string, additionalAnswer:string,token:any){
+    
     const url = `${this.restfulAPI}/reading/update/`
     const header= new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization' : `Bearer ${token}`
     })
-    const body = {quesId: readingId, isTrue: isTrue}
+    const body = {quesId: readingId, isTrue: isTrue, additional: additionalAnswer}
     
     return this.httpClient.post(url,body,{headers:header})
   }

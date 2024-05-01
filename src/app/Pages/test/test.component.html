@@ -1,13 +1,31 @@
 
+<div *ngIf="completed" style="height: 100%;width: 100%;opacity: 0.5;" class="bg-black position-absolute">dwdad</div>
 <div class="container">
     
+    <div *ngIf="completed" class="position-absolute top-50 start-50 translate-middle bg-white border rounded border-success p-3 d-flex justify-content-center align-items-center">
+        <div>
+            <div class="mb-4 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-success" width="75" height="75"
+                    fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </svg>
+            </div>
+            <div class="text-center">
+                <h1>Xin chúc mừng !</h1>
+                <p>Bạn đã hoàn thành câu hỏi ở phần này </p>
+                <button class="btn btn-primary" routerLink="/testoutline/{{lessionId}}">Quay lại</button>
+            </div>
+        </div>
+        </div>
     
     <div *ngIf="response !== undefined">
-        <h1>Câu hỏi hiện tại: {{index}}/{{response.length}}</h1>
+        <h1>Score: {{score}}</h1>
+        <h1>Câu hỏi hiện tại: {{index + 1}}/{{response.length}}</h1>
 
         <div *ngIf="type==='vocab'">
          
-            <app-quiz class="game" (scoreEvent)="score=$event" [score]="score" [lessionVocabs]="vocabs" [inputQuiz]="current"></app-quiz>
+            <app-quiz class="game" (scoreEvent)="childEvent($event)" [score]="score" [lessionVocabs]="vocabs" [inputQuiz]="current"></app-quiz>
             <div class='text-center'>
                 <button class="text btn btn-primary" (click)="nextQuestion()">Câu tiếp theo</button>
             </div>
@@ -15,9 +33,9 @@
     
         <div *ngIf="type==='reading'">
            
-            <app-reading class="game" (scoreEvent)="score=$event" [score]="score" [inputQuiz]="current"></app-reading>
+            <app-reading class="game" (scoreEvent)="childEvent($event)"  [score]="score" [inputQuiz]="current"></app-reading>
             <div class='text-center'>
-                <button class="text btn btn-primary">Kết thúc</button>
+                <button class="text btn btn-primary" (click) = "nextReading()">Kết thúc</button>
             </div>
         </div>
     

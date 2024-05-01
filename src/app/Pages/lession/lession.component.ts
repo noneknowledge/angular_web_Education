@@ -86,6 +86,7 @@ export class LessionComponent implements OnInit, AfterViewInit{
     this.index ++;
 
     // this.startInterval();
+    this.mytool.scrollTop();
     if (this.index >= this.lessionContent.length){
       var token = this.loginService.getToken()
       var body = {Score: this.score, LessionID:this.lessionId, Comment:""}

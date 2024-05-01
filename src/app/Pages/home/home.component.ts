@@ -15,4 +15,13 @@ export class HomeComponent {
   logOut(){
     this.loginService.removeToken()
   }
+
+  scrollTop(){
+    console.log("scoorl")
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'instant' 
+});
+  }
 }

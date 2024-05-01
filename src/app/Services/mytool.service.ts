@@ -9,6 +9,16 @@ export class MytoolService {
   getRandomInt(max:number) {
     return Math.floor(Math.random() * max);
   }
+
+  scrollTop(){
+    console.log("scoorl")
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'instant' 
+    });
+  }
+
   shuffleArray(array:any) {
     var m = array.length, t, i;
  
